@@ -17,4 +17,6 @@ RUN cargo build --release --bin generic-rust
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
 COPY --from=builder /app/target/release/generic-rust /usr/local/bin
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/static ./static
 ENTRYPOINT ["/usr/local/bin/generic-rust"]
